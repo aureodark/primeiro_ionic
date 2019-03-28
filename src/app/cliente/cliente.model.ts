@@ -7,16 +7,16 @@ export class Cliente {
 
     validar(confpws: string) {
         let erros: string = "";
-        if (this.nome == "") {
+        if (this.nome == null) {
             erros += "Nome em branco";
         }
-        if (this.email == "") {
+        if (this.email == null) {
             erros += "Email em branco";
         }
-        if (this.pws == "") {
+        if (this.pws == null) {
             erros += "Senha em branco";
         } else if (this.pws != confpws) {
-            erros += "Senhas diferentes.";
+            erros += "Senhas diferentes";
 
         }
         if (erros != "")

@@ -21,7 +21,15 @@ export class Tab2Page {
     this.cliente = new Cliente;
   }
 
-  addCliente(cliente: Cliente) {
+
+  formDados(form){
+    console.log(form);
+    if (form.valid) {
+      this.addCliente(this.cliente)?form.reset():"";
+    }
+  }
+
+  addCliente(cliente: Cliente):boolean {
     try {
       this.cliente.validar(this.confPws);
 
@@ -30,7 +38,7 @@ export class Tab2Page {
       this.cliente = new Cliente;                                 // Cria um novo cliente
       this.confPws = "";                             
       this.presentAlert("Aviso", "Cadastrado", "sucess");                                 // Exiba na área console do navegador
-
+      return true;
     } catch (erros) {
       this.presentAlert("Erro", erros, "danger");
     }

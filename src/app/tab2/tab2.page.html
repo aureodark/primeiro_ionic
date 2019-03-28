@@ -7,27 +7,33 @@
 </ion-header>
 
 <ion-content>
-  <!-- Inputs with labels -->
-  <ion-item>
-    <ion-label position="floating">Nome</ion-label>
-    <ion-input clearInput [(ngModel)]="cliente.nome"></ion-input>    <!-- [(ngModel)] = get do JavaScript e inserido em variável "cliente.nome"-->
-  </ion-item>
+  <form #fc="ngForm" (ngSubmit)="formDados(fc)">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input clearInput [(ngModel)]="cliente.nome" name="nome"></ion-input>
+      <!-- [(ngModel)] = get do JavaScript e inserido em variável "cliente.nome"-->
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">E-mail</ion-label>
-    <ion-input clearInput [(ngModel)]="cliente.email" type="email"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input clearInput [(ngModel)]="cliente.email" name="email" type="email" required email></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Senha</ion-label>
-    <ion-input clearInput [(ngModel)]="cliente.pws" type="password"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input clearInput [(ngModel)]="cliente.pws" name="pws" type="password" required minlength="6" #pws="ngModel"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Confirmar Senha</ion-label>
-    <ion-input clearInput [(ngModel)]="confPws" type="password"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">Confirmar Senha</ion-label>
+      <ion-input clearInput [(ngModel)]="confPws" name="confPws" type="password" required minlength="6" #conf="ngModel"></ion-input>
+    </ion-item>
 
-  <ion-button (click)="addCliente(cliente)" [disabled]="!cliente.nome || !cliente.email || !cliente.pws || !confPws">Salvar</ion-button>
 
+    <span *ngIf="pws.value != conf.value">Senhas não conferem</span>
+    <ion-button type="submit" [disabled]="!fc.valid">Salvar</ion-button>
+    <ion-button type="reset">Cancelar</ion-button>
+  </form>
 </ion-content>
+
+<!--  (click)="addCliente(cliente)" [disabled]="!cliente.nome || !cliente.email || !cliente.pws || !confPws" -->
