@@ -7,12 +7,25 @@
 </ion-header>
 
 <ion-content>
+  <ion-item-sliding *ngFor="let c of clientes">
 
-  <ion-item *ngFor="let c of clientes">
-    <ion-label>
-      {{ c.nome }} - {{ c.email }}
-    </ion-label>
+    <ion-item-options side="end">
+      <ion-item-option color="danger" expandable (click)="remover(c)">
+        Remover
+      </ion-item-option>
+    </ion-item-options>
 
+    <ion-item>
+      <ion-icon name="person"></ion-icon>
+      <ion-label>{{ c.nome }}</ion-label>
+      <ion-text>{{ c.email }}</ion-text>
+    </ion-item>
 
-  </ion-item>
+    <ion-item-options side="start">
+      <ion-item-option color="tertiary" expandable (click)="atualizar(c)">
+        Atualizar
+      </ion-item-option>
+    </ion-item-options>
+
+  </ion-item-sliding>
 </ion-content>

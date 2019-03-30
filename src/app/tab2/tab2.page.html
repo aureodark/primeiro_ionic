@@ -8,6 +8,7 @@
 
 <ion-content>
   <form #fc="ngForm" (ngSubmit)="formDados(fc)">
+
     <ion-item>
       <ion-label position="floating">Nome</ion-label>
       <ion-input clearInput [(ngModel)]="cliente.nome" name="nome"></ion-input>
@@ -29,10 +30,13 @@
       <ion-input clearInput [(ngModel)]="confPws" name="confPws" type="password" required minlength="6" #conf="ngModel"></ion-input>
     </ion-item>
 
+    <ion-note>
+      <p *ngIf="pws.value != conf.value">Senhas não conferem</p>
+    </ion-note>
 
-    <span *ngIf="pws.value != conf.value">Senhas não conferem</span>
     <ion-button type="submit" [disabled]="!fc.valid">Salvar</ion-button>
     <ion-button type="reset">Cancelar</ion-button>
+
   </form>
 </ion-content>
 

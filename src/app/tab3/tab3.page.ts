@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ClienteService } from '../cliente/cliente.service';
+import { Router } from '@angular/router';
+
 import { Cliente } from '../cliente/cliente.model';
+import { ClienteService } from '../cliente/cliente.service';
 
 @Component({
   selector: 'app-tab3',
@@ -8,14 +10,23 @@ import { Cliente } from '../cliente/cliente.model';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  cliente: Cliente;
   clientes: Cliente[];
 
 
-  constructor(private clienteService: ClienteService) {                     // Função executa quando se cria o componente. 
+  constructor(
+    private clienteService: ClienteService,
+    private router: Router) {                     // Função executa quando se cria o componente. 
     this.clientes = this.clienteService.getClientes();
+    this.cliente = this.clienteService.cliente;
   }
 
-
-
+  remover(cliente: Cliente) {
+    this.clienteService.remover(cliente);
+  }
+  atualizar(cliente: Cliente) {
+    this.clienteService.atualizar(cliente);
+    this.router.navigate(['tabs/tab2'])
+  }
 
 }
